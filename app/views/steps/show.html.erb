@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @step.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @step.body %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @step.start %>
+</p>
+
+<p>
+  <strong>Finish:</strong>
+  <%= @step.finish %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @step.status %>
+</p>
+
+<p>
+  <strong>Wish:</strong>
+  <%= @step.wish_id %>
+</p>
+
+<%= link_to 'Edit', edit_step_path(@step) %> |
+<%= link_to 'Back', steps_path %>
