@@ -1,31 +1,16 @@
-<h1>Listing categories</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Noun</th>
-      <th>Verb</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+<div id="categories">
+  <ul class="list-group">
+    <div class="list-group-item">
+      <h2 class="list-group-item-heading">Categories:</h2>
+    </div>
+    <li class="list-group-item"><%= render partial: 'categories/form', locales: {category: @category} %>
+    </li>
     <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.title %></td>
-        <td><%= category.noun %></td>
-        <td><%= category.verb %></td>
-        <td><%= category.user_id %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <li  class="list-group-item"><%= link_to category.title, category, class: "btn btn-link" %>
+      <span class="badge">0</span>
+    </li>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %>
+  </ul>
+</div>

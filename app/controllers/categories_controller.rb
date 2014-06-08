@@ -1,15 +1,18 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /categories
   # GET /categories.json
   def index
     @categories = Category.all
+    @category = Category.new
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @wish = Wish.new
+    @wishes = @category.wishes
   end
 
   # GET /categories/new
@@ -24,8 +27,8 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
-
+    @category = Category.make(category_params)
+    @category.user_id = current_user.id
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -69,6 +72,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:title, :noun, :verb, :user_id)
+      params.require(:category).permit(:noun, :verb)
     end
 end

@@ -14,3 +14,15 @@
  *= require_tree .
  *= require_self
  */
+
+.navbar {margin-bottom: 0px;}
+.jumbotron {margin-top: 50px;}
+.btn-primary, .badge {font-family: Verdana;}
+#phrase {
+  vertical-align: bottom;
+  font-size: 21px;
+  line-height: 1.7em;
+}
+.container > * {margin-top: 10px;}
+#categories a {font-size: 20px;}
+form > * {margin-bottom: 10px;}

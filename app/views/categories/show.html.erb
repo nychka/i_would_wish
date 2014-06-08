@@ -1,24 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @category.title %>
-</p>
-
-<p>
-  <strong>Noun:</strong>
-  <%= @category.noun %>
-</p>
-
-<p>
-  <strong>Verb:</strong>
-  <%= @category.verb %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @category.user_id %>
-</p>
-
+<ul class="list-group">
+    <div class="list-group-item">
+      <h2 class="list-group-item-heading"><%= @category.title %></h2>
+    </div>
+    <li class="list-group-item">
+      <%= link_to 'Add new wish', new_category_wish_path(@category) %>
+    </li>
+    <%- @wishes.each do |wish| %>
+    <li  class="list-group-item"><%= link_to wish.title,[@category, wish], class: "btn btn-link" %>
+      <span class="badge">0</span>
+    </li>
+    <% end %>
+  </ul>
+<%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %> | 
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>

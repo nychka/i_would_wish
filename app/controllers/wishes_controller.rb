@@ -1,10 +1,10 @@
 class WishesController < ApplicationController
   before_action :set_wish, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_category
   # GET /wishes
   # GET /wishes.json
   def index
-    @wishes = Wish.all
+    redirect_to @category
   end
 
   # GET /wishes/1
@@ -24,11 +24,11 @@ class WishesController < ApplicationController
   # POST /wishes
   # POST /wishes.json
   def create
-    @wish = Wish.new(wish_params)
-
+    @wish = @category.wishes.build(wish_params)
+    
     respond_to do |format|
       if @wish.save
-        format.html { redirect_to @wish, notice: 'Wish was successfully created.' }
+        format.html { redirect_to @category, notice: 'Wish was successfully created.' }
         format.json { render :show, status: :created, location: @wish }
       else
         format.html { render :new }
@@ -42,8 +42,8 @@ class WishesController < ApplicationController
   def update
     respond_to do |format|
       if @wish.update(wish_params)
-        format.html { redirect_to @wish, notice: 'Wish was successfully updated.' }
-        format.json { render :show, status: :ok, location: @wish }
+        format.html { redirect_to [@category, @wish], notice: 'Wish was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@category, @wish] }
       else
         format.html { render :edit }
         format.json { render json: @wish.errors, status: :unprocessable_entity }
@@ -66,9 +66,12 @@ class WishesController < ApplicationController
     def set_wish
       @wish = Wish.find(params[:id])
     end
+    def set_category
+      @category = Category.find(params[:category_id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wish_params
-      params.require(:wish).permit(:title, :start, :finish, :status, :body, :category_id)
+      params.require(:wish).permit(:title, :start, :finish, :body, :category_id)
     end
 end

@@ -56,3 +56,31 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+module UserHelpers
+  def password 
+    '12345678'
+  end
+  def email
+    'test@example.com'
+  end
+  def login
+    User.create(email: email, password: password, password_confirmation: password)
+    visit new_user_session_path
+    fill_in 'user_email', with: email
+    fill_in 'user_password', with: password
+    click_button 'Sign in'
+  end
+  def logout
+    click_link 'Log out'
+  end
+  def register
+    visit new_user_password_path
+    fill_in 'user_email', with: email
+    fill_in 'user_password', with: password
+    fill_in 'user_password_confirmation', with: password
+    click_button 'Sign up'
+  end
+end
+
+World(UserHelpers)
+  

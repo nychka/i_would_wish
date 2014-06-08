@@ -5,7 +5,7 @@ class CreateSteps < ActiveRecord::Migration
       t.text :body
       t.datetime :start
       t.datetime :finish
-      t.integer :status
+      t.integer :status, default: 0
       t.integer :wish_id
 
       t.timestamps

@@ -4,7 +4,7 @@ class CreateWishes < ActiveRecord::Migration
       t.string :title
       t.datetime :start
       t.datetime :finish
-      t.integer :status
+      t.integer :status, default: 0
       t.text :body
       t.integer :category_id
 
