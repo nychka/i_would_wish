@@ -1,8 +1,11 @@
 class WishesController < ApplicationController
   before_action :set_wish, only: [:show, :edit, :update, :destroy]
   before_action :set_category
+  before_action :set_breadcrumbs
   # GET /wishes
   # GET /wishes.json
+  
+
   def index
     redirect_to @category
   end
@@ -10,15 +13,19 @@ class WishesController < ApplicationController
   # GET /wishes/1
   # GET /wishes/1.json
   def show
+    add_breadcrumb @wish.title, :category_wish_path
   end
 
   # GET /wishes/new
   def new
+    add_breadcrumb "New"
     @wish = Wish.new
   end
 
   # GET /wishes/1/edit
   def edit
+    add_breadcrumb @wish.title, :category_wish_path
+    add_breadcrumb "Edit"
   end
 
   # POST /wishes
@@ -68,6 +75,12 @@ class WishesController < ApplicationController
     end
     def set_category
       @category = Category.find(params[:category_id])
+      
+    end
+
+    def set_breadcrumbs
+      add_breadcrumb "Home", :root_path
+      add_breadcrumb @category.title, @category
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

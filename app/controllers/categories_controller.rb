@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_breadcrumbs
+ 
   # GET /categories
   # GET /categories.json
   def index
@@ -22,6 +24,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    add_breadcrumb "Edit"
   end
 
   # POST /categories
@@ -73,5 +76,9 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(:noun, :verb)
+    end
+     def set_breadcrumbs
+      add_breadcrumb "Home", :root_path
+      add_breadcrumb @category.title, @category if @category
     end
 end
