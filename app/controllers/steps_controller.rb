@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_action :set_step, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_wish
+  before_action :set_category
   # GET /steps
   # GET /steps.json
   def index
@@ -24,12 +25,12 @@ class StepsController < ApplicationController
   # POST /steps
   # POST /steps.json
   def create
-    @step = Step.new(step_params)
+    @step = @wish.steps.build(step_params)
 
     respond_to do |format|
       if @step.save
-        format.html { redirect_to @step, notice: 'Step was successfully created.' }
-        format.json { render :show, status: :created, location: @step }
+        format.html { redirect_to [@category, @wish], notice: 'Step was successfully created.' }
+        format.json { render :show, status: :created, location: [@category, @wish] }
       else
         format.html { render :new }
         format.json { render json: @step.errors, status: :unprocessable_entity }
@@ -56,7 +57,7 @@ class StepsController < ApplicationController
   def destroy
     @step.destroy
     respond_to do |format|
-      format.html { redirect_to steps_url, notice: 'Step was successfully destroyed.' }
+      format.html { redirect_to [@category, @wish], notice: 'Step was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,9 +67,15 @@ class StepsController < ApplicationController
     def set_step
       @step = Step.find(params[:id])
     end
+    def set_category
+      @category = Category.find(params[:category_id])
+    end
+    def set_wish
+      @wish = Wish.find(params[:wish_id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def step_params
-      params.require(:step).permit(:title, :body, :start, :finish, :status, :wish_id)
+      params.require(:step).permit(:title, :body, :start, :finish, :status, :wish_id, :category_id)
     end
 end

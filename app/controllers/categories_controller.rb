@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :set_breadcrumbs
- 
+  before_action :set_locale
+
   # GET /categories
   # GET /categories.json
   def index
@@ -77,8 +78,15 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:noun, :verb)
     end
-     def set_breadcrumbs
-      add_breadcrumb "Home", :root_path
-      add_breadcrumb @category.title, @category if @category
+    def set_breadcrumbs
+      if @category
+        add_breadcrumb t("home"), :root_path
+        add_breadcrumb @category.title, @category 
+      end
+    end
+    def set_locale
+      # if params[:locale] is nil then I18n.default_locale will be used
+      session[:locale] = params[:locale] if params[:locale]
+      I18n.locale = session[:locale]
     end
 end

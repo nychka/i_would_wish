@@ -24,9 +24,9 @@
                   <div class="navbar pull-right">
                     <% if current_user %>
                     Logged as: <%= current_user.email %> |
-                    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-link" %>
+                    <%= link_to t("log_out"), destroy_user_session_path, method: :delete, class: "btn btn-link" %>
                     <% else %>
-                    <%= link_to "sign in", new_user_session_path %>
+                    <%= link_to t("sign_in"), new_user_session_path %>
                     <% end %>
                   </div>
                 </div>
@@ -35,9 +35,11 @@
               <!-- Main jumbotron for a primary marketing message or call to action -->
               <div class="jumbotron">
                 <div class="container">
-                  <%= render partial: "shared/flash_messages", flash: flash %>  <ol class="breadcrumb">
-                  <%= render_breadcrumbs :tag => :li, :separator => "" %>
-                </ol>
+                  <%= render partial: "shared/flash_messages", flash: flash %><% if @category and @category.id %>  
+                  <ol class="breadcrumb">
+                      <%= render_breadcrumbs :tag => :li, :separator => "" %>
+                    </ol>
+                    <% end %>
                 <%= yield %>
               </div>
 

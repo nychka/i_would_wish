@@ -1,16 +1,11 @@
-<%= simple_form_for(@step) do |f| %>
+<%= simple_form_for([@category, @wish, @step]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :body %>
-    <%= f.input :start %>
-    <%= f.input :finish %>
-    <%= f.input :status %>
-    <%= f.input :wish_id %>
+    <%= f.input :title, required: true, label: 'Step',input_html: {class: 'form-control'} %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>

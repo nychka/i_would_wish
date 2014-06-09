@@ -1,40 +1,30 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <%= link_to t('back'), category_path(@category), class: "btn btn-default"%>
+  </li>
+  <div class="list-group-item">
+    <h2 class="list-group-item-heading"><%= @wish.title %>
+      <%= link_to content_tag('sup', t('edit')), edit_category_wish_path, class: "btn btn-link" %>
+    </h2>
+  </div>
+  <li class="list-group-item">
+    <%= t('start') %>:
+    <%= @wish.start %>
+    <%= t('finish') %>:
+    <%= @wish.finish %>
+  </li>
+  <li class="list-group-item"><%= @wish.body %></li>
+</ul>
+<ul class="steps list-group">
+  <div id="new_step">
+    <%= render partial: 'steps/form', locals: {category: @category, wish: @wish, step: @step}%>
+  </div>
+  <%- @steps.each do |step| %>
+    <li class="list-group-item">
+      <input type="checkbox" value="<%= step.status %>" />
+      <%= step.title%>
+      <%= link_to t('destroy'), {controller: 'steps', action: 'destroy', wish_id: @wish.id, id: step.id}, class: 'btn btn-danger', method: 'delete'%>
+    </li>
+  <% end %>
+</ul>
 
-<!-- ol class="breadcrumb">
-  <li><%= link_to 'Home', root_path %></li>
-  <li><%= link_to @category.title, @category %></li>
-  <li class="active"><%= @wish.title %></li>
-</ol -->
-
-
-<p>
-  <strong>Title:</strong>
-  <%= @wish.title %>
-</p>
-
-<p>
-  <strong>Start:</strong>
-  <%= @wish.start %>
-</p>
-
-<p>
-  <strong>Finish:</strong>
-  <%= @wish.finish %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @wish.status %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @wish.body %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @wish.category_id %>
-</p>
-
-<%= link_to 'Edit', edit_category_wish_path %> |
-<%= link_to 'Back', category_path(@category)%>

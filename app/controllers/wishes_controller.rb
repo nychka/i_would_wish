@@ -14,6 +14,8 @@ class WishesController < ApplicationController
   # GET /wishes/1.json
   def show
     add_breadcrumb @wish.title, :category_wish_path
+    @step = Step.new
+    @steps = @wish.steps
   end
 
   # GET /wishes/new
@@ -79,7 +81,7 @@ class WishesController < ApplicationController
     end
 
     def set_breadcrumbs
-      add_breadcrumb "Home", :root_path
+      add_breadcrumb t("home"), :root_path
       add_breadcrumb @category.title, @category
     end
 

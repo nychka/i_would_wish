@@ -3,13 +3,13 @@
 <div id="categories">
   <ul class="list-group">
     <div class="list-group-item">
-      <h2 class="list-group-item-heading">Categories:</h2>
+      <h2 class="list-group-item-heading"><%= t("categories") %></h2>
     </div>
     <li class="list-group-item"><%= render partial: 'categories/form', locales: {category: @category} %>
     </li>
     <% @categories.each do |category| %>
     <li  class="list-group-item"><%= link_to category.title, category, class: "btn btn-link" %>
-      <span class="badge">0</span>
+      <span class="badge"><%= category.wishes.size %></span>
     </li>
     <% end %>
   </ul>

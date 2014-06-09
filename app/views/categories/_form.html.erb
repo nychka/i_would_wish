@@ -2,18 +2,25 @@
 <%= f.error_notification %>
 <div class="row">
   <div class=" col-md-3">
+    <div class="input-group">
     <%= f.input :noun,label: false, required: true, input_html: {class: 'form-control'}, placeholder: 'e.g.Books'
     %>
+    <% if I18n.locale == :ua %>
+    <span class="input-group-addon">,</span>
+    <% end %>
   </div>
-  <div class="col-md-3"><span id="phrase"><%= KEY_PHRASE %></span></div>
+  </div>
+  <div class="col-md-3"><span id="phrase"><%= t('site_phrase') %></span></div>
   <div class="col-md-3">
     <div class="input-group">
-      <span class="input-group-addon">to</span>
+      <% if I18n.locale == :en %>
+        <span class="input-group-addon">to</span>
+      <% end %>
       <%= f.input :verb,label: false, required: true, input_html: {class: 'form-control'}, placeholder: 'e.g.read' %>
     </div>
   </div>
   <div class="col-md-2">
-    <%= f.button :submit, class: 'btn btn-primary form-control',value: SUBMIT_TEXT %>
+    <%= f.button :submit, class: 'btn btn-primary form-control',value: t('submit_text') %>
   </div>
 </div>
 <% end %>
