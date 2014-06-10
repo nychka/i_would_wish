@@ -1,18 +1,12 @@
 <ul class="list-group">
   <li class="list-group-item">
     <%= link_to t('back'), category_path(@category), class: "btn btn-default"%>
+    <%= link_to t('edit'), edit_category_wish_path, class: "btn btn-default" %>
   </li>
   <div class="list-group-item">
     <h2 class="list-group-item-heading"><%= @wish.title %>
-      <%= link_to content_tag('sup', t('edit')), edit_category_wish_path, class: "btn btn-link" %>
     </h2>
   </div>
-  <li class="list-group-item">
-    <%= t('start') %>:
-    <%= @wish.start %>
-    <%= t('finish') %>:
-    <%= @wish.finish %>
-  </li>
   <li class="list-group-item"><%= @wish.body %></li>
 </ul>
 <ul class="steps list-group">
@@ -20,11 +14,15 @@
     <%= render partial: 'steps/form', locals: {category: @category, wish: @wish, step: @step}%>
   </div>
   <%- @steps.each do |step| %>
-    <li class="list-group-item">
-      <input type="checkbox" value="<%= step.status %>" />
+  <li class="list-group-item row">
+    <div class="col-xs-10">
       <%= step.title%>
-      <%= link_to t('destroy'), {controller: 'steps', action: 'destroy', wish_id: @wish.id, id: step.id}, class: 'btn btn-danger', method: 'delete'%>
-    </li>
+    </div>
+    <div class="col-xs-2">
+       <%= link_to step.status, {controller: 'steps', action:'update', category_id: @category.id, wish_id: @wish.id}, class: 'btn btn-default'%>
+      <%= link_to t("destroy"), {controller: 'steps', action: 'destroy', wish_id: @wish.id, id: step.id}, class: 'btn btn-default', method: 'delete'%>
+    </div>
+  </li>
   <% end %>
 </ul>
 
