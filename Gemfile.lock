@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/rmagick/rmagick.git
+  revision: 79e1708c7f6792a3a90cb8cb3ffaeb74c58e092e
+  specs:
+    rmagick (2.13.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +43,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.1)
@@ -193,6 +204,7 @@ PLATFORMS
 DEPENDENCIES
   breadcrumbs_on_rails
   capybara
+  carrierwave
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
@@ -205,6 +217,7 @@ DEPENDENCIES
   mysql2
   pg
   rails (= 4.1.0)
+  rmagick (= 2.13.2)!
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

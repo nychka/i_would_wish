@@ -51,3 +51,5 @@ end
 
 gem 'devise'
 gem 'simple_form'
+gem 'carrierwave'
+gem 'rmagick', '2.13.2', :github => 'rmagick/rmagick'

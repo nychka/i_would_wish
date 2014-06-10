@@ -1,16 +1,18 @@
 <ul class="list-group">
+  <li class="list-group-item">
+    <%= link_to t('back'), categories_path, class: "btn btn-default"%>
+   <%= link_to t('add_new_wish'), new_category_wish_path(@category), class: 'btn btn-primary' %>
+    <%= link_to t('edit'), edit_category_path, class: "btn btn-default" %>
+    <%= link_to t('destroy'), @category, class: "btn btn-default", method: 'delete', data: {confirm: 'Are you sure?'} %>
+  </li>
     <div class="list-group-item">
       <h2 class="list-group-item-heading"><%= @category.title %></h2>
     </div>
-    <li class="list-group-item">
-      <%= link_to t('add_new_wish'), new_category_wish_path(@category) %>
-    </li>
     <%- @wishes.each do |wish| %>
-    <li  class="list-group-item"><%= link_to wish.title,[@category, wish], class: "btn btn-link" %>
+    <li  class="list-group-item">
+      <%= link_to image_tag(wish.image_url(:thumb), class: 'img-rounded'), [@category, wish] %>
+      <%= link_to wish.title,[@category, wish], class: "btn btn-link" %>
       <span class="badge"><%= wish.steps.size %></span>
     </li>
     <% end %>
   </ul>
-<%= link_to t('destroy'), @category, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-<%= link_to t('edit'), edit_category_path(@category) %> |
-<%= link_to t('back'), categories_path %>

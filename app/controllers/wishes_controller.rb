@@ -65,7 +65,7 @@ class WishesController < ApplicationController
   def destroy
     @wish.destroy
     respond_to do |format|
-      format.html { redirect_to wishes_url, notice: 'Wish was successfully destroyed.' }
+      format.html { redirect_to @category, notice: 'Wish was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -87,6 +87,6 @@ class WishesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wish_params
-      params.require(:wish).permit(:title, :start, :finish, :body, :category_id)
+      params.require(:wish).permit(:title, :start, :finish, :body, :category_id, :image, :remote_image_url)
     end
 end

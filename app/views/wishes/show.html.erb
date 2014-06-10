@@ -2,10 +2,12 @@
   <li class="list-group-item">
     <%= link_to t('back'), category_path(@category), class: "btn btn-default"%>
     <%= link_to t('edit'), edit_category_wish_path, class: "btn btn-default" %>
+    <%= link_to t('destroy'), category_wish_path, class: "btn btn-default", method: 'delete', data: {confirm: 'Are you sure?'} %>
   </li>
   <div class="list-group-item">
     <h2 class="list-group-item-heading"><%= @wish.title %>
     </h2>
+    <%= image_tag @wish.image_url(:thumb), class: 'img-rounded' %>
   </div>
   <li class="list-group-item"><%= @wish.body %></li>
 </ul>
