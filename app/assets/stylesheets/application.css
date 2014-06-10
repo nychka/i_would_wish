@@ -28,3 +28,4 @@
 form > * {margin-bottom: 10px;}
 .row {margin: 0px;}
 .btn-primary {color: white !important;}
+#add_category {max-width: 100px; max-height: 100px;}

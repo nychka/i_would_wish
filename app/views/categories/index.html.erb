@@ -3,12 +3,14 @@
 <div id="categories">
   <ul class="list-group">
     <div class="list-group-item">
-      <h2 class="list-group-item-heading"><%= t("categories") %></h2>
+      <h2 class="list-group-item-heading"><%= t("categories") %>
+        <%= link_to 'Add category', new_category_path, class: 'btn btn-primary' %>
+      </h2>
     </div>
-    <li class="list-group-item"><%= render partial: 'categories/form', locales: {category: @category} %>
-    </li>
     <% @categories.each do |category| %>
-    <li  class="list-group-item"><%= link_to category.title, category, class: "btn btn-link" %>
+    <li  class="list-group-item">
+      <%= image_tag(category.image.url(:category), class: 'img-rounded') %>
+      <%= link_to category.title, category, class: "btn btn-link" %>
       <span class="badge"><%= category.wishes.size %></span>
     </li>
     <% end %>
